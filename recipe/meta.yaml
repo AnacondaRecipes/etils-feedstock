@@ -6,13 +6,13 @@ package:
   version: {{ version }}
 
 source:
-  skip: true  #[py<310]
   url: https://github.com/google/etils/archive/refs/tags/v{{ version }}.tar.gz
   sha256: 16245bce35a04b87cf24a345db76c60164107a338b95a4c153edc89adf4ab766
 
 build:
   script: {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
   number: 0
+  skip: true  # [py<310]
 
 requirements:
   host:
