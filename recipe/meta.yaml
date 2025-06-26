@@ -7,21 +7,21 @@ package:
   version: {{ version }}
 
 source:
+  skip: true  #[py<310]
   url: https://github.com/google/etils/archive/refs/tags/v{{ version }}.tar.gz
   sha256: 16245bce35a04b87cf24a345db76c60164107a338b95a4c153edc89adf4ab766
 
 build:
-  noarch: python
-  script: {{ PYTHON }} -m pip install . -vv
+  script: {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
   number: 0
 
 requirements:
   host:
     - pip
-    - python {{ python_min }}
+    - python
     - flit-core >=3.8,<4
   run:
-    - python >={{ python_min }}
+    - python
 
 
 test:
@@ -31,13 +31,17 @@ test:
     - pip check
   requires:
     - pip
-    - python {{ python_min }}
+    - python
 
 about:
-  home: https://pypi.org/project/etils/
+  home: https://etils.readthedocs.io
   summary: Collection of common python utils
+  description: etils (eclectic utils) is an open-source collection of utils for python.
   license: Apache-2.0
   license_file: LICENSE
+  license_family: Apache
+  doc_url: https://etils.readthedocs.io
+  dev_url: https://github.com/google/etils
 
 extra:
   recipe-maintainers:
