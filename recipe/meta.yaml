@@ -1,5 +1,5 @@
 {% set name = "etils" %}
-{% set version = "1.0.0" %}
+{% set version = "1.12.2" %}
 
 package:
   name: {{ name|lower }}
@@ -7,21 +7,20 @@ package:
 
 source:
   url: https://github.com/google/etils/archive/refs/tags/v{{ version }}.tar.gz
-  sha256: 1d8c20caf222563b0bfdfdb74f7ae2a217fbf30cb800fbe3081a31c932f07e72
+  sha256: 16245bce35a04b87cf24a345db76c60164107a338b95a4c153edc89adf4ab766
 
 build:
-  noarch: python
-  script: {{ PYTHON }} -m pip install . -vv
+  script: {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
   number: 0
+  skip: true  # [py<310]
 
 requirements:
   host:
     - pip
-    - python >=3.7
-    - flit-core >=3.5,<4
+    - python
+    - flit-core >=3.8,<4
   run:
-    - python >=3.7
-
+    - python
 
 test:
   imports:
@@ -30,13 +29,19 @@ test:
     - pip check
   requires:
     - pip
+    - python
 
 about:
-  home: https://pypi.org/project/etils/
+  home: https://etils.readthedocs.io
   summary: Collection of common python utils
+  description: etils (eclectic utils) is an open-source collection of utils for python.
   license: Apache-2.0
   license_file: LICENSE
+  license_family: Apache
+  doc_url: https://etils.readthedocs.io
+  dev_url: https://github.com/google/etils
 
 extra:
   recipe-maintainers:
     - ngam
+    - traversaro
