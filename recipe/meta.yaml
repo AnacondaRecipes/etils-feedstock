@@ -10,9 +10,9 @@ source:
   sha256: 99d6d2992b1a256bd921ae210dd9f00e6a100428edb71d15d8ce05fb70ba3fd1
 
 build:
-  script: {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
   number: 0
   skip: true  # [py<311]
+  script: {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
 
 requirements:
   host:
@@ -23,13 +23,12 @@ requirements:
     - python
 
 test:
+  requires:
+    - pip
   imports:
     - etils
   commands:
     - pip check
-  requires:
-    - pip
-    - python
 
 about:
   home: https://etils.readthedocs.io
